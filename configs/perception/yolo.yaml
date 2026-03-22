@@ -1,0 +1,4 @@
+# yolo.yaml — PapillaDetector inference configuration
+weights: /data/ERCP/ercp_access/outputs/perception/yolo_papilla/yolov8n_v1/weights/best.pt
+conf_thresh: 0.25
+device: cuda

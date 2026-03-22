@@ -12,6 +12,7 @@ outputs/
 !outputs/.gitkeep
 data/
 !data/.gitkeep
+!scripts/data/
 wandb/
 *.pt
 *.pkl

@@ -1,0 +1,7 @@
+# papilla_dataset.yaml — YOLO dataset configuration for papilla detection
+path: /data/ERCP/ercp_access/data/yolo_dataset
+train: images/train
+val: images/val
+nc: 1
+names:
+  0: papilla

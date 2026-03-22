@@ -26,6 +26,10 @@ class StateBuilder:
         use_oracle: If True, compute state from gt_info instead of RGB.
         e_thresh: Alignment threshold for readiness computation.
         scale_min: Minimum scale for readiness computation.
+        detector_weights: Path to YOLOv8 weights for papilla detection.
+                          Empty string (default) disables detector.
+        detector_conf_thresh: Confidence threshold for PapillaDetector (default 0.25).
+        detector_device: Device for PapillaDetector inference (default 'cuda').
     """
 
     def __init__(
@@ -34,12 +38,25 @@ class StateBuilder:
         use_oracle: bool = True,
         e_thresh: float = 0.1,
         scale_min: float = 0.25,
+        detector_weights: str = "",
+        detector_conf_thresh: float = 0.25,
+        detector_device: str = "cuda",
     ):
         self.history_len = history_len
         self.use_oracle = use_oracle
         self.e_thresh = e_thresh
         self.scale_min = scale_min
         self._history: deque = deque(maxlen=history_len)
+
+        # Phase 1+: instantiate PapillaDetector if weights are provided
+        self._detector = None
+        if detector_weights:
+            from src.perception.papilla_detector import PapillaDetector
+            self._detector = PapillaDetector(
+                weights=detector_weights,
+                conf_thresh=detector_conf_thresh,
+                device=detector_device,
+            )
 
     def reset(self):
         self._history.clear()
@@ -102,8 +119,9 @@ class StateBuilder:
         self, rgb: np.ndarray
     ) -> tuple[float, float, float, float]:
         """
-        Phase 1+: FastSAM segmentation → (e_x, e_y, scale, conf).
-        Phase 0 stub: returns zeros with conf=0.
+        Phase 1+: PapillaDetector (YOLOv8) → (e_x, e_y, scale, conf).
+        Returns (0.0, 0.0, 0.0, 0.0) if no detector is configured or no detection.
         """
-        # TODO Phase 1: replace with FastSAM inference
+        if self._detector is not None:
+            return self._detector.detect(rgb)
         return 0.0, 0.0, 0.0, 0.0
