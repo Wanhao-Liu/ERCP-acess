@@ -1,0 +1,6 @@
+obs:
+  type: rgb
+  use_rgb: true
+  use_state: false
+  rgb_shape: [3, 512, 512]
+  normalize_rgb: true

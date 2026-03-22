@@ -1,0 +1,19 @@
+defaults:
+  - env: toy
+  - obs: state
+  - policy: scripted
+  - train: eval
+  - runtime: local
+  - _self_
+
+project_name: ercp_access
+experiment_name: ???
+seed: 42
+output_dir: outputs/
+
+logging:
+  use_wandb: false
+  wandb_project: ercp_access
+  log_interval: 10
+  video_interval: 50
+  checkpoint_interval: 100

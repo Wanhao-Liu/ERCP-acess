@@ -1,0 +1,7 @@
+train:
+  mode: eval
+  n_eval_episodes: 100
+  save_video: false
+  save_metrics: true
+  checkpoint_path: null
+  difficulties: [easy, medium, hard]

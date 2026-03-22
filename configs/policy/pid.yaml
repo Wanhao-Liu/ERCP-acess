@@ -1,0 +1,14 @@
+policy:
+  type: pid
+  kp_pitch: 2.0
+  ki_pitch: 0.01
+  kd_pitch: 0.1
+  kp_yaw: 2.0
+  ki_yaw: 0.01
+  kd_yaw: 0.1
+  kp_insert: 1.0
+  insert_strength: 0.8
+  target_scale: 0.35
+  insert_gate_enabled: true
+  conf_threshold: 0.6
+  readiness_threshold: 0.7

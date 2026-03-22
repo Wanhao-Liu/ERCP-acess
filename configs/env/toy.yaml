@@ -1,0 +1,8 @@
+env:
+  type: toy
+  max_steps: 200
+  target_noise_std: 0.02
+  success_insert_depth: 0.02
+  insertion_scale: 0.005
+  bend_scale: 0.01
+  dt: 0.02

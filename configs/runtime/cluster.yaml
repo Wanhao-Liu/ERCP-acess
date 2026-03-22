@@ -1,0 +1,4 @@
+runtime:
+  device: cuda
+  headless: true
+  num_workers: 8

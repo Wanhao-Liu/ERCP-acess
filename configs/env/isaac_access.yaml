@@ -1,0 +1,12 @@
+env:
+  type: isaac_access
+  num_envs: 1
+  use_oracle: true
+  headless: false
+  dt: 0.02
+  sim_dt: 0.002
+  decimation: 10
+  episode_length_s: 30.0
+  env_spacing: 1.0
+  camera_width: 512
+  camera_height: 512

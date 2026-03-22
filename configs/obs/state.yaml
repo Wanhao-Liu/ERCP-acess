@@ -1,0 +1,8 @@
+obs:
+  type: state
+  use_rgb: false
+  use_state: true
+  state_dim: 6
+  state_fields: [e_x, e_y, scale, conf, stability, readiness]
+  normalize_state: false
+  phase_0_oracle: true

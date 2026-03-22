@@ -1,0 +1,4 @@
+runtime:
+  device: cpu
+  headless: true
+  num_workers: 1

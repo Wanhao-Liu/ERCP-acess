@@ -1,0 +1,8 @@
+obs:
+  type: rgb_state
+  use_rgb: true
+  use_state: true
+  rgb_shape: [3, 512, 512]
+  state_dim: 6
+  normalize_rgb: true
+  normalize_state: true

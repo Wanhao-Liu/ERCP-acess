@@ -1,0 +1,7 @@
+policy:
+  type: scripted
+  kp_align: 3.0
+  approach_insert: 0.3
+  target_scale: 0.35
+  insert_strength: 0.8
+  recover_speed: 0.6

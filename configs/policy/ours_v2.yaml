@@ -1,0 +1,19 @@
+policy:
+  type: ours_v2
+  # Phase manager
+  phase_manager:
+    conf_thresh: 0.5
+    recovery_steps: 10
+  # Insertion gate
+  insertion_gate:
+    e_thresh: 0.08
+    scale_min: 0.25
+    conf_min: 0.6
+    stability_min: 0.6
+    readiness_min: 0.7
+  # Fine approach: PPO actor
+  actor:
+    type: state_mlp
+    hidden_dims: [128, 128]
+  insert_strength: 0.8
+  recover_speed: 0.6

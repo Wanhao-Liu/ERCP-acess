@@ -1,0 +1,20 @@
+train:
+  mode: ppo
+  total_steps: 500000
+  n_steps: 2048
+  batch_size: 64
+  n_epochs: 10
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  lr: 3.0e-4
+  eval_freq: 10000
+  n_eval_episodes: 50
+  save_freq: 50000
+  # Reward weights
+  reward:
+    w_align: 1.0
+    w_progress: 2.0
+    w_safety: -5.0
+    w_success: 50.0
+    w_target_loss: -2.0

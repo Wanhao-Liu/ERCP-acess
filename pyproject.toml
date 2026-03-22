@@ -1,0 +1,18 @@
+[project]
+name = "ercp_access"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0",
+    "numpy",
+    "omegaconf",
+    "wandb",
+    "opencv-python",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
