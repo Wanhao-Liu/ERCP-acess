@@ -1,14 +1,25 @@
 policy:
   type: pid
-  kp_pitch: 2.0
-  ki_pitch: 0.01
-  kd_pitch: 0.1
-  kp_yaw: 2.0
-  ki_yaw: 0.01
-  kd_yaw: 0.1
-  kp_insert: 1.0
-  insert_strength: 0.8
+
+  # Alignment axes PID (shared for pitch and yaw)
+  kp_align: 3.0
+  ki_align: 0.05
+  kd_align: 0.2
+  integral_limit_align: 2.0
+
+  # Approach axis PID (scale -> insert)
+  kp_insert: 2.0
+  ki_insert: 0.02
+  kd_insert: 0.2
+  integral_limit_insert: 1.0
+
+  # Fixed parameters
   target_scale: 0.35
+  insert_strength: 0.8
+  insertion_phase_align_scale: 0.3
+  dt: 0.02
+
+  # Legacy compatibility fields
   insert_gate_enabled: true
   conf_threshold: 0.6
   readiness_threshold: 0.7
