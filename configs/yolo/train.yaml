@@ -9,9 +9,9 @@ data: /data/ERCP/ercp_access/configs/yolo/papilla_dataset.yaml
 # ── Training schedule ─────────────────────────────────────────────────────────
 epochs: 100
 patience: 20                 # early stopping patience
-batch: 16
+batch: 64
 imgsz: 640
-workers: 4
+workers: 8
 
 # ── Optimizer ─────────────────────────────────────────────────────────────────
 optimizer: AdamW

@@ -32,8 +32,11 @@ from matplotlib.gridspec import GridSpec
 # Add new baselines here as they become available
 BASELINES = {
     "B0\nScripted":  "outputs/scripted/val",
-    "B2\nPPO-State": "outputs/b2_ppo/b2_ppo_state/final_eval/val",
-    "B1\nSeg+PID":  "outputs/b1_pid/val",
+    "B1\nSeg+PID":   "outputs/b1_pid/val",
+    # B2: best result is 150k checkpoint (23% success).
+    # final_model (500k) collapsed to 0% due to PPO catastrophic forgetting.
+    # See outputs/b2_ppo/b2_ppo_state/checkpoints/b2_best_by_success.zip for the canonical model.
+    "B2\nPPO-State": "outputs/b2_ppo/b2_150k_eval/val",
     # Future baselines (uncomment when available):
     # "B3\nw/o Gate": "outputs/b3_no_gate/val",
     # "B4\nImg-only": "outputs/b4_image/val",
