@@ -2,11 +2,35 @@ env:
   type: isaac_access
   num_envs: 1
   use_oracle: true
-  headless: false
+  headless: true
+
   dt: 0.02
   sim_dt: 0.002
   decimation: 10
   episode_length_s: 30.0
-  env_spacing: 1.0
+  max_episode_steps: 1500
+
   camera_width: 512
   camera_height: 512
+  camera_fov_deg: 60.0
+
+  papilla_pos: [0.10, 0.00, 0.00]
+  papilla_radius: 0.005
+  papilla_height: 0.003
+  scope_radius: 0.002
+
+  init_dist_range: [0.05, 0.10]
+  init_angle_range_deg: [10.0, 15.0]
+
+  insertion_scale: 0.0025
+  bend_scale: 0.05
+
+  ref_distance: 0.05
+  ref_scale: 0.15
+
+  detector_weights: /data/ERCP/ercp_access/outputs/perception/yolo_papilla/yolov8n_v1/weights/best.pt
+  detector_conf_thresh: 0.25
+  detector_device: cuda
+  state_history_len: 8
+
+  success_insert_depth: 0.02
