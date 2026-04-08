@@ -142,7 +142,6 @@ class IsaacAccessEnv(AccessEnvBase):
 
         # --- 2. Import Isaac modules (only after app is running) ---
         from omni.isaac.core import World
-        from omni.isaac.core.objects import FixedCylinder
         from omni.isaac.core.prims import XFormPrim
         from omni.isaac.sensor import Camera
         import omni.replicator.core as rep
@@ -164,19 +163,23 @@ class IsaacAccessEnv(AccessEnvBase):
         # --- 4. Add lighting ---
         self._add_lighting(prim_utils)
 
-        # --- 5. Add papilla (static cylinder) ---
-        # In GUI mode scale up 10× so it's visible in the Viewport world-view.
-        # Oracle state uses scope_pos/papilla_pos directly, so visual scale
+        # --- 5. Add anatomy scene (simple.usdc: duodenum tube + papilla mesh) ---
+        # Transform aligns simple.usdc so that papilla_target lands at [0.10, 0, 0].
+        # Rotation (13.5°) maps the start→papilla_target vector onto +X axis.
+        # Translation (0.107, 0.035, 0.006) puts papilla_target at _papilla_pos=[0.10,0,0].
+        # Oracle state uses _papilla_pos / _scope_pos directly — visual mesh position
         # does not affect e_x/e_y/scale computation.
-        _vis_scale = 10.0 if not self._headless else 1.0
-        self._papilla_obj = FixedCylinder(
-            prim_path=self._scene_cfg.papilla.prim_path,
-            name=self._scene_cfg.papilla.name,
-            position=np.array(self._scene_cfg.papilla.position),
-            radius=self._scene_cfg.papilla.radius * _vis_scale,
-            height=self._scene_cfg.papilla.height * _vis_scale,
-            color=np.array(self._scene_cfg.papilla.color),
+        import omni.usd as _omni_usd
+        from pxr import UsdGeom as _UsdGeom, Gf as _Gf
+        _stage = _omni_usd.get_context().get_stage()
+        _anatomy_prim = _stage.DefinePrim("/World/anatomy", "Xform")
+        _anatomy_prim.GetReferences().AddReference(
+            "/data/ERCP/ercp_access/simple.usdc"
         )
+        _xf = _UsdGeom.Xformable(_anatomy_prim)
+        _xf.AddTranslateOp().Set(_Gf.Vec3d(0.107, 0.035, 0.006))
+        _xf.AddOrientOp().Set(_Gf.Quatf(0.9931, 0.0, -0.0171, 0.1164))
+        self._papilla_obj = None  # mesh loaded; oracle state uses _papilla_pos directly
 
         # --- 6. Add scope tip XFormPrim (camera mount point) ---
         prim_utils.create_prim(
